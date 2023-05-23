@@ -34,7 +34,7 @@ const getUserById = (req, res) => {
     .query("select * from users where id = ?", [id])
     .then(([users]) => {
       if (users[0] != null) {
-        res.json(users[0]);
+        res.json(users[0]).sendStatus(200);
       } else {
         res.status(404).send("Not Found");
       }
