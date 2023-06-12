@@ -38,3 +38,24 @@ app.listen(port, (err) => {
     console.log(`Server is listening on ${port}`);
   }
 });
+
+const isItDwight = (req, res) => {
+  if (
+    req.body.email === "dwight@theoffice.com" &&
+    req.body.password === "123456"
+  ) {
+    res.send("Credentials are valid");
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+const verifyPassword = (req, res) => {
+  res.send(req.user);
+};
+
+app.post(
+  "/api/login",
+  userHandlers.getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword
+);
